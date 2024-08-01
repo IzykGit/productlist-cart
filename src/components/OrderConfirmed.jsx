@@ -27,7 +27,7 @@ const OrderConfirmed = ({ selectedProducts, totalPrice, newOrder }) => {
                         <div key={index} className={orderConfirmed.cart_item}>
                             <div>
                                 <div>
-                                    <img src={selected.thumbnail} placeholder="" aria-label="" className={orderConfirmed.cart_image}/>
+                                    <img src={selected.thumbnail} alt={`${selected.name}`} aria-label="" className={orderConfirmed.cart_image}/>
                                 </div>
 
                                 <div className={orderConfirmed.cart_item_info}>

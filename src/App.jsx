@@ -177,14 +177,14 @@ const App = () => {
                     return (
                         <div key={product.name} className="product_container">
                             <img aria-label={`Image of ${product.name}`}
-                            src={imageUrl} className={matchedProduct ? "product_image_selected" : "product_image"}/>
+                            src={imageUrl} className={matchedProduct ? "product_image_selected" : "product_image"} alt={`${product.name}`}/>
 
                             <div className="cart_button_container">
 
 
                                 {!matchedProduct && (
                                     <div className="default_add" role="button" aria-label="Add to cart" onClick={() => addToCart(product)}>
-                                        <img src={cartIcon}/>
+                                        <img src={cartIcon} alt="Cart" aria-label=""/>
                                         <p>Add to cart</p>
                                     </div>
                                 )}
@@ -228,7 +228,7 @@ const App = () => {
                 {selectedProducts.length === 0 ? (
                     <div className={selectedProducts.length === 0 ? "empty_cart" : ""}>
 
-                        <img src={selectedProducts.length === 0 ? emptyCart : ""}/>
+                        <img src={selectedProducts.length === 0 ? emptyCart : ""} aria-label="Empty Cart" alt="Empty Cart"/>
 
                         {selectedProducts.length === 0 && <p className="empty_text">Your added items will appear hear</p>}
 
@@ -266,7 +266,7 @@ const App = () => {
 
 
                         <div className="carbon_alert">
-                            <img src={carbonIcon} aria-label="" placeholder=""/>
+                            <img src={carbonIcon} aria-label="" alt="Carbon-Neutral"/>
                             <p>This is a <strong style={{fontWeight: "500"}}>carbon-neutral</strong> delivery</p>
                         </div>
 
