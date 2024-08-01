@@ -2,9 +2,8 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 
 import emptyCart from '/assets/images/illustration-empty-cart.svg'
-
-
 import cartIcon from '/assets/images/icon-add-to-cart.svg';
+import carbonIcon from '/assets/images/icon-carbon-neutral.svg'
 
 import "./App.css"
 
@@ -49,6 +48,9 @@ const App = () => {
     }, [screen.width])
 
 
+
+
+
     const addToCart = (product) => {
         let alreadySelected = selectedProducts.some(selection => selection.itemName === product.name);
 
@@ -68,8 +70,8 @@ const App = () => {
 
 
 
-        setSelectedProducts(prevCounts => [
-            ...prevCounts,
+        setSelectedProducts(prevSelections => [
+            ...prevSelections,
             {
                 itemName: product.name,
                 thumbnail: product.image.thumbnail,
@@ -82,7 +84,6 @@ const App = () => {
 
     const removeItem = (product) => {
         const checkCount = selectedProducts.find(selection => selection.itemName === product.name)
-        console.log(checkCount)
 
         if(checkCount.count > 1) {
             const updatedSelections = selectedProducts.map(selection => {
@@ -100,6 +101,13 @@ const App = () => {
         }
     }
 
+
+    const deleteItem = (product) => {
+        const editedSelections = selectedProducts.filter(selection => selection.itemName !== product.itemName);
+        setSelectedProducts(editedSelections)
+    }
+
+
     const totalItems = () => {
         let counter = 0
 
@@ -109,11 +117,31 @@ const App = () => {
 
         return counter
     }
-
     const totaled = totalItems()
 
-    console.log(selectedProducts)
 
+    const calcPrice = () => {
+
+        let priceArr = []
+
+        for(let i = 0; i < selectedProducts.length; i++) {
+            priceArr.push(selectedProducts[i].price * selectedProducts[i].count) 
+        }
+
+        console.log(priceArr)
+        if(selectedProducts.length > 1) {
+            let total = priceArr.reduce((prev, curr) => prev + curr)
+            return total
+        }
+        else {
+            return priceArr[0]
+        }
+
+
+    }
+    const totalPrice = calcPrice()
+
+    console.log(totalPrice)
 
     return (
         <main className={screenType !== "mobile" ? "main" : "mobile_main"}>
@@ -131,7 +159,7 @@ const App = () => {
                     return (
                         <div key={product.name} className="product_container">
                             <img aria-label={`Image of ${product.name}`}
-                            src={imageUrl} className="product_image"/>
+                            src={imageUrl} className={matchedProduct ? "product_image_selected" : "product_image"}/>
 
                             <div className="cart_button_container">
 
@@ -166,10 +194,8 @@ const App = () => {
                             </div>
 
                             <p className="product_category">{product.category}</p>
-
                             <p className="product_name">{product.name}</p>
-
-                            <p className="product_price">${product.price}</p>
+                            <p className="product_price">${(product.price).toFixed(2)}</p>
                         </div>
                     )
                 })}
@@ -181,7 +207,7 @@ const App = () => {
             <section className="cart_section">
                 <h2>Your Cart ({totaled ? `${totaled}` : `0`})</h2>
 
-                {selectedProducts.length === 0 && (
+                {selectedProducts.length === 0 ? (
                     <div className={selectedProducts.length === 0 ? "empty_cart" : ""}>
 
                         <img src={selectedProducts.length === 0 ? emptyCart : ""}/>
@@ -189,17 +215,47 @@ const App = () => {
                         {selectedProducts.length === 0 && <p className="empty_text">Your added items will appear hear</p>}
 
                     </div>
-                )}
+                ) : (
+                    <div className="cart_items_container">
+                        {selectedProducts.map((selected, index) => (
+                                <div key={index} className="cart_item">
+                                    <div className="cart_item_info">
+                                        <p>{selected.itemName}</p>
 
-                <div>
-                    {selectedProducts.length > 0 && (
-                        selectedProducts.map(selected => (
-                            <div key={selected.itemName}>
-                                <p>{selected.itemName}</p>
-                            </div>
-                        ))
-                    )}
-                </div>
+                                        <div className="cart_item_price">
+                                            <p>{selected.count}x</p>
+                                            <p>@${(selected.price).toFixed(2)}</p>
+                                            <p>${(selected.price * selected.count).toFixed(2)}</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <button type="button" aria-label="Remove Item" className="remove_item_from_cart" onClick={() => deleteItem(selected)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10">
+                                                <path d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            )
+                        )}
+
+
+                        <div className="order_total">
+                            <p>Order Total</p>
+                            <h3>${(totalPrice).toFixed(2)}</h3>
+                        </div>
+
+
+                        <div className="carbon_alert">
+                            <img src={carbonIcon} aria-label="" placeholder=""/>
+                            <p>This is a <strong style={{fontWeight: "500"}}>carbon-neutral</strong> delivery</p>
+                        </div>
+
+
+                        <button type="button" className="confirm_order_button">Confirm Order</button>
+                    </div>
+                )}
 
             </section>
         </main>
