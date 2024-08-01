@@ -51,15 +51,22 @@ const App = () => {
     const addToCart = (product) => {
         setCartItems(prevItems => [...prevItems, product])
 
-        let exists = false;
-        const existingProducts = [...selectedProducts]
+        let alreadySelected = selectedProducts.some(selection => selection.itemName === product.name);
 
-        existingProducts.forEach(selection => {
-            if(selection.name === product.name) {
-                return console.log(true)
-            }
-        })
+        if (alreadySelected) {
+            setSelectedProducts(prevSelections => 
+                prevSelections.map(selection => 
+                    selection.itemName === product.name 
+                        ? { ...selection, count: selection.count + 1 } 
+                        : selection
+                )
+            );
 
+            return;
+        }
+        
+
+        console.log(alreadySelected)
 
         setSelectedProducts(prevCounts => [
             ...prevCounts,
@@ -72,6 +79,7 @@ const App = () => {
         ])
     }
 
+    console.log(selectedProducts)
 
     return (
         <main className="main">
