@@ -183,7 +183,7 @@ const App = () => {
 
 
                                 {!matchedProduct && (
-                                    <div className="default_add" role="butto n" aria-label="Add to cart" onClick={() => addToCart(product)}>
+                                    <div className="default_add" role="button" aria-label="Add to cart" onClick={() => addToCart(product)}>
                                         <img src={cartIcon}/>
                                         <p>Add to cart</p>
                                     </div>
