@@ -195,8 +195,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 1.2rem;
-    height: 1.2rem;
+    max-width: 1.2rem;
+    min-height: 1.2rem;
 
     border-radius: 100%;
     border: 1px solid hsl(20, 50%, 98%);
@@ -212,6 +212,8 @@
 
 .quantity_button > svg {
     fill: hsl(20, 50%, 98%);
+    width: 100%;
+    height: auto;
 }
 
 
