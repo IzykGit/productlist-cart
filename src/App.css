@@ -221,6 +221,12 @@
 }
 
 
+@media screen and (max-width: 800px) {
+    .quantity_button {
+        padding: 0.3rem;
+    }
+}
+
 
 .quantity_button:hover {
     background-color: hsl(20, 50%, 98%);
