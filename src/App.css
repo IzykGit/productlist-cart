@@ -7,6 +7,26 @@
     gap: 1rem;
 }
 
+.mobile_main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 2rem;
+
+    padding: 4rem 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .product_section {
     width: 100%;
@@ -27,6 +47,17 @@
     gap: 1rem;
 
     width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    .products_grid {
+        display: grid;
+
+        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+        gap: 1rem;
+    
+        width: 100%;
+    }
 }
 
 
@@ -50,7 +81,7 @@
 
 
 .product_image {
-    max-width: 15rem;
+    max-width: inherit;
     border-radius: 0.5rem;
     margin-bottom: -1.5rem;
 }

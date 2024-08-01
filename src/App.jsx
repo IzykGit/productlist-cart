@@ -23,9 +23,10 @@ const App = () => {
         }
     }
 
-    const [products, setProducts] = useState([])
+    let screenType = screenWidth()
+    
 
-    const [cartItems, setCartItems] = useState([])
+    const [products, setProducts] = useState([])
 
     const [selectedProducts, setSelectedProducts] = useState([])
     
@@ -49,8 +50,6 @@ const App = () => {
 
 
     const addToCart = (product) => {
-        setCartItems(prevItems => [...prevItems, product])
-
         let alreadySelected = selectedProducts.some(selection => selection.itemName === product.name);
 
         if (alreadySelected) {
@@ -81,17 +80,30 @@ const App = () => {
 
     const removeItem = (product) => {
         const editedSelections = selectedProducts.filter(selection => selection.itemName !== product.name);
-
-        setCartItems(editedSelections)
         setSelectedProducts(editedSelections)
     }
 
+    const totalItems = () => {
+        if(selectedProducts.length === 0) {
+            return;
+        }
+        else if (selectedProducts.length === 1) {
+            return selectedProducts[0].count
+        }
+        else {
+            const total = selectedProducts.reduce((prev, curr) => prev.count + curr.count)
+            return total;
+        }
+    }
 
+    const totaled = totalItems()
+
+    console.log(totaled)
     console.log(selectedProducts)
 
 
     return (
-        <main className="main">
+        <main className={screenType !== "mobile" ? "main" : "mobile_main"}>
             <section className="product_section">
                 <h1>Desserts</h1>
 
@@ -99,7 +111,7 @@ const App = () => {
 
 
                 {products && products.map(product => {
-                    const screenType = screenWidth()
+                    screenType
                     const imageUrl = product.image[screenType]
                     const matchedProduct = selectedProducts.find(item => item.itemName === product.name);
 
@@ -154,23 +166,24 @@ const App = () => {
             </section>
 
             <section className="cart_section">
-                <h2>Your Cart ({cartItems.length})</h2>
+                <h2>Your Cart ({totaled})</h2>
 
-                {cartItems && (
-                    <div className={cartItems.length === 0 ? "empty_cart" : ""}>
+                {selectedProducts && (
+                    <div className={selectedProducts.length === 0 ? "empty_cart" : ""}>
 
-                        <img src={cartItems.length === 0 ? emptyCart : ""}/>
+                        <img src={selectedProducts.length === 0 ? emptyCart : ""}/>
 
-                        {cartItems.length === 0 && <p className="empty_text">Your added items will appear hear</p>}
-
-                    </div>
-                )}
-
-                {!cartItems && (
-                    <div>
+                        {selectedProducts.length === 0 && <p className="empty_text">Your added items will appear hear</p>}
 
                     </div>
                 )}
+
+                <div>
+                    {!selectedProducts && (
+                        <div></div>
+                    )}
+                </div>
+
             </section>
         </main>
     )
