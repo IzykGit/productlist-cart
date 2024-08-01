@@ -166,7 +166,7 @@ const App = () => {
             </section>
 
             <section className="cart_section">
-                <h2>Your Cart ({totaled})</h2>
+                <h2>Your Cart ({totaled !== 0 ? "0" : `${totaled}`})</h2>
 
                 {selectedProducts && (
                     <div className={selectedProducts.length === 0 ? "empty_cart" : ""}>
