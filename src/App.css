@@ -301,6 +301,8 @@
 .cart_item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
     gap: 1rem;
 
     padding: 1rem 0rem;
@@ -368,7 +370,10 @@
 }
 
 .remove_item_from_cart > svg {
-    fill: hsl(7, 20%, 60%)
+    fill: hsl(7, 20%, 60%);
+
+    width: 100%; 
+    height: auto;
 }
 
 
