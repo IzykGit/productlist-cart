@@ -193,7 +193,7 @@ const App = () => {
                                     <div className="added_product">
 
                                         <button type="button" aria-label="Remove Item" className="quantity_button" onClick={() => removeItem(product)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 2">
                                                 <path d="M0 .375h10v1.25H0V.375Z"/>
                                             </svg>
                                         </button>

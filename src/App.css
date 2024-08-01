@@ -195,8 +195,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
 
     border-radius: 100%;
     border: 1px solid hsl(20, 50%, 98%);
@@ -380,7 +380,7 @@
     fill: hsl(7, 20%, 60%);
 
     min-width: 0.7rem;
-    min-height: 0.5rem;
+    min-height: 0.15rem;
 
     margin: 0;
     padding: 0;
