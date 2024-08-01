@@ -22,8 +22,14 @@
 
     border-radius: 0.3rem;
 
-    padding: 1rem 2rem;
+    padding: 2rem 2rem;
     box-sizing: border-box;
+}
+
+@media screen and (max-width: 800px) {
+    .confirm_panel {
+        width: 90%;
+    }
 }
 
 
@@ -71,6 +77,7 @@
 
 .cart_item > div {
     display: flex;
+    gap: 1rem;
 }
 
 .cart_item_info {
@@ -139,7 +146,7 @@
 
 
 .new_order {
-    margin: 1rem 0rem 0rem 0rem;
+    margin: 2rem 0rem 0rem 0rem;
 
     height: 3rem;
     width: 100%;
