@@ -101,16 +101,13 @@ const App = () => {
     }
 
     const totalItems = () => {
-        if(selectedProducts.length === 0) {
-            return;
+        let counter = 0
+
+        for(let i = 0; i < selectedProducts.length; i++) {
+            counter += selectedProducts[i].count
         }
-        else if (selectedProducts.length === 1) {
-            return selectedProducts[0].count
-        }
-        else {
-            const total = selectedProducts.reduce((prev, curr) => prev.count + curr.count)
-            return total;
-        }
+
+        return counter
     }
 
     const totaled = totalItems()
@@ -184,7 +181,7 @@ const App = () => {
             <section className="cart_section">
                 <h2>Your Cart ({totaled ? `${totaled}` : `0`})</h2>
 
-                {selectedProducts && (
+                {selectedProducts.length === 0 && (
                     <div className={selectedProducts.length === 0 ? "empty_cart" : ""}>
 
                         <img src={selectedProducts.length === 0 ? emptyCart : ""}/>
@@ -195,8 +192,12 @@ const App = () => {
                 )}
 
                 <div>
-                    {!selectedProducts && (
-                        <div></div>
+                    {selectedProducts.length > 0 && (
+                        selectedProducts.map(selected => (
+                            <div key={selected.itemName}>
+                                <p>{selected.itemName}</p>
+                            </div>
+                        ))
                     )}
                 </div>
 
