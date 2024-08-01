@@ -65,7 +65,6 @@ const App = () => {
             return;
         }
 
-        console.log(alreadySelected)
 
 
         setSelectedProducts(prevCounts => [
@@ -77,6 +76,14 @@ const App = () => {
                 count: 1
             }
         ])
+    }
+
+
+    const removeItem = (product) => {
+        const editedSelections = selectedProducts.filter(selection => selection.itemName !== product.name);
+
+        setCartItems(editedSelections)
+        setSelectedProducts(editedSelections)
     }
 
 
@@ -114,7 +121,7 @@ const App = () => {
                                 {matchedProduct && (
                                     <div className="added_product">
 
-                                        <button type="button" aria-label="Remove Item" className="quantity_button">
+                                        <button type="button" aria-label="Remove Item" className="quantity_button" onClick={() => removeItem(product)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 10 2">
                                                 <path d="M0 .375h10v1.25H0V.375Z"/>
                                             </svg>
