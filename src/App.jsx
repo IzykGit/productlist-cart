@@ -54,14 +54,16 @@ const App = () => {
 
         if (alreadySelected) {
             setSelectedProducts(prevSelections => 
-                prevSelections.map(selection => 
-                    selection.itemName === product.name 
-                        ? { ...selection, count: selection.count + 1 } 
-                        : selection
-                )
+                prevSelections.map(selection => {
+                    if(selection.itemName === product.name) { 
+                        return { ...selection, count: selection.count + 1 }
+                    } else {
+                        return selection
+                    } 
+                })
             );
 
-            return;
+            return
         }
 
 
@@ -79,8 +81,23 @@ const App = () => {
 
 
     const removeItem = (product) => {
-        const editedSelections = selectedProducts.filter(selection => selection.itemName !== product.name);
-        setSelectedProducts(editedSelections)
+        const checkCount = selectedProducts.find(selection => selection.itemName === product.name)
+        console.log(checkCount)
+
+        if(checkCount.count > 1) {
+            const updatedSelections = selectedProducts.map(selection => {
+                if(selection.itemName === product.name) {
+                    return { ...selection, count: selection.count - 1 };
+                } else {
+                    return selection;
+                }
+            });
+            setSelectedProducts(updatedSelections);
+        }
+        else {
+            const editedSelections = selectedProducts.filter(selection => selection.itemName !== product.name);
+            setSelectedProducts(editedSelections)
+        }
     }
 
     const totalItems = () => {
@@ -98,7 +115,6 @@ const App = () => {
 
     const totaled = totalItems()
 
-    console.log(totaled)
     console.log(selectedProducts)
 
 
@@ -166,7 +182,7 @@ const App = () => {
             </section>
 
             <section className="cart_section">
-                <h2>Your Cart ({totaled !== 0 ? "0" : `${totaled}`})</h2>
+                <h2>Your Cart ({totaled ? `${totaled}` : `0`})</h2>
 
                 {selectedProducts && (
                     <div className={selectedProducts.length === 0 ? "empty_cart" : ""}>
