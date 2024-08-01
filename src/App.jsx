@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react"
 import axios from 'axios'
 
-import emptyCart from '/assets/images/illustration-empty-cart.svg'
+import emptyCart from '/assets/images/illustration-empty-cart.svg';
 import cartIcon from '/assets/images/icon-add-to-cart.svg';
-import carbonIcon from '/assets/images/icon-carbon-neutral.svg'
+import carbonIcon from '/assets/images/icon-carbon-neutral.svg';
+
 
 import "./App.css"
+import OrderConfirmed from "./components/OrderConfirmed";
 
 const App = () => {
 
@@ -28,6 +30,8 @@ const App = () => {
     const [products, setProducts] = useState([])
 
     const [selectedProducts, setSelectedProducts] = useState([])
+
+    const [confirmPanel, setConfirmPanel] = useState(false)
     
     const getProducts = async () => {
         try {
@@ -141,10 +145,24 @@ const App = () => {
     }
     const totalPrice = calcPrice()
 
+
+
+    const newOrder = () => {
+        setSelectedProducts([])
+        setConfirmPanel(false)
+    }
+
     console.log(totalPrice)
 
     return (
+        <>
+
+        {confirmPanel && (
+            <OrderConfirmed selectedProducts={selectedProducts} totalPrice={totalPrice} newOrder={newOrder}/>
+        )}
+
         <main className={screenType !== "mobile" ? "main" : "mobile_main"}>
+
             <section className="product_section">
                 <h1>Desserts</h1>
 
@@ -253,12 +271,13 @@ const App = () => {
                         </div>
 
 
-                        <button type="button" className="confirm_order_button">Confirm Order</button>
+                        <button type="button" className="confirm_order_button" onClick={() => setConfirmPanel(true)}>Confirm Order</button>
                     </div>
                 )}
 
             </section>
         </main>
+        </>
     )
 }
 

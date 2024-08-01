@@ -303,7 +303,7 @@
 .cart_item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 1rem;
 
     padding: 1rem 0rem;
     border-bottom: 1px solid hsl(7, 20%, 60%);
@@ -441,3 +441,7 @@
 .confirm_order_button:active {
     transform: scale(0.95);
 }
+
+
+
+
