@@ -76,21 +76,36 @@
 
 
 
+
+
+
+
+
+
+
+
+
 .cart_button_container {
     align-self: center;
 
-    border: 1px solid hsl(12, 20%, 44%);
     border-radius: 1.3rem;
 
     background-color: white;
+    overflow: hidden;
 }
 
 
 .default_add {
     display: flex;
     justify-content: center;
+    align-items: center;
+
     gap: 0.5rem;
+    border: 1px solid hsl(12, 20%, 44%);
+    border-radius: 1.3rem;
+
     width: 9rem;
+    height: 2.5rem;
 
     cursor: pointer;
 }
@@ -100,6 +115,89 @@
     font-size: 0.7rem;
     font-weight: 500;
 }
+
+.default_add > img {
+    height: 1.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.added_product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0rem 0.5rem;
+    box-sizing: border-box;
+
+    border: 1px solid hsl(14, 86%, 42%);
+    background-color: hsl(14, 86%, 42%);
+
+    height: 2.5rem;
+    width: 9rem;
+}
+
+.added_product > * {
+    margin: 0;
+}
+
+.quantity_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 1.2rem;
+    height: 1.2rem;
+
+    border-radius: 100%;
+    border: 1px solid hsl(20, 50%, 98%);
+
+    background-color: transparent;
+
+    cursor: pointer;
+}
+
+.quantity_button > svg {
+    fill: hsl(20, 50%, 98%);
+    height: 24px;
+    width: 24px;
+}
+
+
+.quantity_button:hover {
+    background-color: hsl(20, 50%, 98%);
+}
+
+.quantity_button:hover > svg {
+    fill: hsl(14, 86%, 42%);
+}
+
+
+.product_count {
+    color: hsl(20, 50%, 98%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

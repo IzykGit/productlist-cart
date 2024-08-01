@@ -4,7 +4,7 @@ import axios from 'axios'
 import emptyCart from '/assets/images/illustration-empty-cart.svg'
 
 
-import cartIcon from '/assets/images/icon-add-to-cart.svg'
+import cartIcon from '/assets/images/icon-add-to-cart.svg';
 
 import "./App.css"
 
@@ -64,9 +64,9 @@ const App = () => {
 
             return;
         }
-        
 
         console.log(alreadySelected)
+
 
         setSelectedProducts(prevCounts => [
             ...prevCounts,
@@ -79,7 +79,9 @@ const App = () => {
         ])
     }
 
+
     console.log(selectedProducts)
+
 
     return (
         <main className="main">
@@ -92,6 +94,7 @@ const App = () => {
                 {products && products.map(product => {
                     const screenType = screenWidth()
                     const imageUrl = product.image[screenType]
+                    const matchedProduct = selectedProducts.find(item => item.itemName === product.name);
 
                     return (
                         <div key={product.name} className="product_container">
@@ -100,12 +103,33 @@ const App = () => {
 
                             <div className="cart_button_container">
 
-                                <div className="default_add" role="button" aria-label="Add to cart" onClick={() => addToCart(product)}>
-                                    <img src={cartIcon}/>
-                                    <p>Add to cart</p>
-                                </div>
 
+                                {!matchedProduct && (
+                                    <div className="default_add" role="butto n" aria-label="Add to cart" onClick={() => addToCart(product)}>
+                                        <img src={cartIcon}/>
+                                        <p>Add to cart</p>
+                                    </div>
+                                )}
 
+                                {matchedProduct && (
+                                    <div className="added_product">
+
+                                        <button type="button" aria-label="Remove Item" className="quantity_button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 10 2">
+                                                <path d="M0 .375h10v1.25H0V.375Z"/>
+                                            </svg>
+                                        </button>
+
+                                        <p className="product_count">{matchedProduct.count}</p>
+
+                                        <button type="button" aria-label="Add Item" className="quantity_button" onClick={() => addToCart(product)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 10 10">
+                                                <path d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"/>
+                                            </svg>
+                                        </button>
+
+                                    </div>
+                                )}
 
                             </div>
 
