@@ -1,6 +1,6 @@
 
 .main {
-    padding: 4rem 4rem;
+    padding: 4rem 7rem;
 
     display: flex;
     justify-content: space-between;
@@ -35,6 +35,8 @@
 .product_section > h1 {
     color: hsl(14, 65%, 9%);
     grid-row: 1;
+
+    font-size: 3rem;
 
     margin-top: 0;
 }
