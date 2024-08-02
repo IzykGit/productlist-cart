@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+
 import checkIcon from '/assets/images/icon-order-confirmed.svg';
 
 import orderConfirmed from './OrderConfirmed.module.css'
@@ -11,7 +12,7 @@ const OrderConfirmed = ({ selectedProducts, totalPrice, newOrder }) => {
     return (
         <section className={orderConfirmed.order_confirmed_section}>
 
-        <div className={orderConfirmed.confirm_panel}>
+        <div data-aos="fade-down" className={orderConfirmed.confirm_panel}>
 
             <img aria-label="" placeholder="" src={checkIcon}/>
 

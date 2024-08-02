@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react"
 import axios from 'axios'
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import emptyCart from '/assets/images/illustration-empty-cart.svg';
 import cartIcon from '/assets/images/icon-add-to-cart.svg';
 import carbonIcon from '/assets/images/icon-carbon-neutral.svg';
@@ -10,6 +13,12 @@ import "./App.css"
 import OrderConfirmed from "./components/OrderConfirmed";
 
 const App = () => {
+
+    useEffect(() => {
+        AOS.init({
+            duration: 500
+        })
+    }, [])
 
     
     const screenWidth = () => {
@@ -51,7 +60,14 @@ const App = () => {
         screenWidth()
     }, [screen.width])
 
-
+    useEffect(() => {
+        if(confirmPanel) {
+            document.body.style.overflow = "hidden"
+        }
+        else {
+            document.body.style.overflow = "auto"
+        }
+    }, [confirmPanel])
 
 
 
@@ -153,6 +169,7 @@ const App = () => {
     }
 
     console.log(totalPrice)
+
 
     return (
         <>
